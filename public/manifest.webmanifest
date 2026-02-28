@@ -1,0 +1,28 @@
+{
+  "name": "LiftIt.Fit — Track Your Lifts. Beat your best.",
+  "short_name": "LiftIt.Fit",
+  "description": "A high-performance, mobile-first workout tracker with ghost workout system for progressive overload.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#171719",
+  "theme_color": "#171719",
+  "categories": ["fitness", "health", "sports"],
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
