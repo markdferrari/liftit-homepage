@@ -23,7 +23,7 @@ export default $config({
   },
   async run() {
     const certificateArn =
-      "arn:aws:acm:us-east-1:632700996244:certificate/6c6bff69-46ae-4f0e-a68e-148a276c2aab";
+      "arn:aws:acm:us-east-1:150479998935:certificate/32dc0b94-fe72-4110-aced-96e6ae794e58";
 
     // Domain configuration per stage
     const domainConfig =
