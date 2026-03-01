@@ -80,9 +80,9 @@ const pricingTiers: PricingTier[] = [
     features: [
       "Unlimited workout logging",
       "Workout history & stats",
-      "Ghost workout overlays",
+      "Basic analytics",
       "Weekly volume targets",
-      "Public plan sharing",
+      "Community workout plans",
       "Plate calculator & rest timer",
     ],
     cta: "Get Started",
@@ -118,7 +118,7 @@ const pricingTiers: PricingTier[] = [
     description: "Personalised AI coaching to maximise your gains.",
     features: [
       "Everything in Premium",
-      "AI workout recommendations",
+      "AI-driven workout recommendations",
       "Recovery meal suggestions",
       "Weekly target optimisation",
       "Auto session generation",
@@ -419,7 +419,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-muted-foreground text-sm max-w-md">
-            Track your lifts. Beat your best. Beat your best — every session.
+            Track your lifts. Beat your best - every session.
           </p>
           <a
             href={APP_URL}
