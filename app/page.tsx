@@ -428,6 +428,26 @@ export default function Home() {
             Open the app <ArrowRight className="w-4 h-4" />
           </a>
           <div className="brand-gradient-line h-px w-full max-w-xs mt-4" />
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+            <a
+              href="mailto:support@liftit.fit"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              support@liftit.fit
+            </a>
+            <a
+              href="/privacy"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/terms"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Terms of Service
+            </a>
+          </div>
           <p className="text-muted-foreground/50 text-xs">
             &copy; {new Date().getFullYear()} LiftIt.fit. All rights reserved.
           </p>
