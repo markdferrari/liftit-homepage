@@ -1,41 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 import {
-  Ghost,
   Target,
-  Timer,
+  Users,
   Calculator,
   History,
   Share2,
   Check,
   Dumbbell,
+  Gauge,
   Sparkles,
   ArrowRight,
+  UtensilsCrossed,
+  CircleSlash2
 } from "lucide-react";
 
 const APP_URL = "https://app.liftit.fit";
 
 const features = [
   {
-    icon: Ghost,
+    icon: Gauge,
     title: "Beat your Best",
     description:
-      "See your previous session as a translucent overlay. Beat your personal records every time.",
+      "See your previous session as you work out. Beat your personal records every time.",
   },
   {
     icon: Target,
     title: "Weekly Volume Targets",
     description:
-      "Set weekly volume budgets per muscle group and track your progress toward optimal training frequency.",
+      "Life can get in the way - set weekly targets and track your progress toward optimal training frequency.",
   },
   {
-    icon: Timer,
-    title: "Rest Timer",
+    icon: Users,
+    title: "Community Workout Plans",
     description:
-      "Built-in configurable rest timer with haptic feedback so you stay on track between sets.",
-  },
+      "Connect with other lifters and share your workout plans to stay motivated.",
+  },  
+  {
+    icon: UtensilsCrossed,
+    title: "Meal Suggestions",
+    description:
+      "Get personalized meal suggestions to support your training and recovery.",
+  },  
   {
     icon: Calculator,
     title: "Plate Calculator",
@@ -52,8 +61,14 @@ const features = [
     icon: Share2,
     title: "Plan Sharing",
     description:
-      "Share your workout plans with friends via a simple link. Public sharing is free — private sharing with Premium.",
+      "Share your workout plans with friends with a private link.",
   },
+  {
+    icon: CircleSlash2,
+    title: "Ad-free, forever",
+    description:
+      "We'll never show you ads or sell your data.",
+  },  
 ];
 
 interface PricingTier {
@@ -84,6 +99,8 @@ const pricingTiers: PricingTier[] = [
       "Weekly volume targets",
       "Community workout plans",
       "Plate calculator & rest timer",
+      "1 rep max calculator",
+      "Ad-free, forever"
     ],
     cta: "Get Started",
     ctaHref: APP_URL,
@@ -103,8 +120,9 @@ const pricingTiers: PricingTier[] = [
       "Priority support",
       "Early access to new features",
       "4-week free trial included",
+      "Recovery meal suggestions"
     ],
-    cta: "Start Free Trial",
+    cta: "Start Free Trial - Full Elite Access for 28 days",
     ctaHref: APP_URL,
     highlighted: true,
   },
@@ -114,19 +132,20 @@ const pricingTiers: PricingTier[] = [
     annualPrice: "£59.99",
     annualPeriod: "/year",
     period: "/month",
-    badge: "AI-Powered",
-    description: "Personalised AI coaching to maximise your gains.",
+    badge: "Scientifically Driven Programming",
+    description: "Tailored for your lifestyle, goals, and recovery",
     features: [
       "Everything in Premium",
-      "AI-driven workout recommendations",
+      "Personalised workout recommendations",
       "Recovery meal suggestions",
       "Weekly target optimisation",
       "Auto session generation",
+      "Unlimited private plan sharing",
       "Goal-setting with personalised plans",
     ],
-    cta: "Coming Soon",
-    ctaHref: "#",
-    disabled: true,
+    cta: "Start Free Trial - Full Elite Access for 28 days",
+    ctaHref: APP_URL,
+    disabled: false,
   },
 ];
 
@@ -139,8 +158,105 @@ function BrandName({ className = "" }: { className?: string }) {
   );
 }
 
+function PricingCard({
+  tier,
+  annual,
+}: {
+  tier: PricingTier;
+  annual: boolean;
+}) {
+  return (
+    <div
+      className={`relative rounded-2xl border p-8 flex flex-col transition-all h-full ${
+        tier.highlighted
+          ? "border-primary bg-card scale-[1.02] shadow-[0_0_40px_oklch(0.65_0.24_25/0.15)]"
+          : "border-border bg-card/60"
+      }`}
+    >
+      {/* Badge */}
+      {tier.badge && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-4 py-1 text-xs font-semibold whitespace-nowrap ${
+              tier.badge === "AI-Powered"
+                ? "bg-secondary text-primary"
+                : "bg-primary text-primary-foreground"
+            }`}
+          >
+            {tier.badge === "AI-Powered" && (
+              <Sparkles className="w-3 h-3" />
+            )}
+            {tier.badge}
+          </span>
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="mb-6">
+        <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
+        <div className="flex items-baseline gap-1">
+          <span className="text-4xl font-bold tracking-tight">
+            {annual && tier.annualPrice ? tier.annualPrice : tier.price}
+          </span>
+          <span className="text-muted-foreground text-sm">
+            {annual && tier.annualPeriod ? tier.annualPeriod : tier.period}
+          </span>
+        </div>
+        <p className="text-muted-foreground text-sm mt-2">
+          {tier.description}
+        </p>
+      </div>
+
+      {/* Features */}
+      <ul className="flex-1 space-y-3 mb-8">
+        {tier.features.map((feature) => (
+          <li key={feature} className="flex items-start gap-3 text-sm">
+            <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+            <span className="text-foreground/80">{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      <a
+        href={tier.disabled ? undefined : tier.ctaHref}
+        className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all ${
+          tier.highlighted
+            ? "bg-primary text-primary-foreground hover:brightness-110 hover:scale-[1.02] active:scale-100"
+            : tier.disabled
+              ? "bg-secondary text-muted-foreground cursor-not-allowed"
+              : "bg-secondary text-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-100"
+        }`}
+        {...(tier.disabled
+          ? { "aria-disabled": true }
+          : { target: "_blank", rel: "noopener noreferrer" })}
+      >
+        {tier.cta}
+        {!tier.disabled && <ArrowRight className="w-4 h-4" />}
+      </a>
+    </div>
+  );
+}
+
 export default function Home() {
   const [annual, setAnnual] = useState(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    containScroll: "trimSnaps",
+    startIndex: 1,
+  });
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  // Subscribe to select events
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   return (
     <div className="min-h-screen">
@@ -316,85 +432,42 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start">
-            {pricingTiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`relative rounded-2xl border p-8 flex flex-col transition-all ${
-                  tier.highlighted
-                    ? "border-primary bg-card scale-[1.02] shadow-[0_0_40px_oklch(0.65_0.24_25/0.15)]"
-                    : "border-border bg-card/60"
-                }`}
-              >
-                {/* Badge */}
-                {tier.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span
-                      className={`inline-flex items-center gap-1 rounded-full px-4 py-1 text-xs font-semibold ${
-                        tier.badge === "AI-Powered"
-                          ? "bg-secondary text-primary"
-                          : "bg-primary text-primary-foreground"
-                      }`}
-                    >
-                      {tier.badge === "AI-Powered" && (
-                        <Sparkles className="w-3 h-3" />
-                      )}
-                      {tier.badge}
-                    </span>
+          {/* Mobile carousel */}
+          <div className="md:hidden">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-4 pt-4">
+                {pricingTiers.map((tier) => (
+                  <div
+                    key={tier.name}
+                    className="flex-[0_0_85%] min-w-0"
+                  >
+                    <PricingCard tier={tier} annual={annual} />
                   </div>
-                )}
-
-                {/* Header */}
-                <div className="mb-6">
-                  <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold tracking-tight">
-                      {annual && tier.annualPrice
-                        ? tier.annualPrice
-                        : tier.price}
-                    </span>
-                    <span className="text-muted-foreground text-sm">
-                      {annual && tier.annualPeriod
-                        ? tier.annualPeriod
-                        : tier.period}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground text-sm mt-2">
-                    {tier.description}
-                  </p>
-                </div>
-
-                {/* Features */}
-                <ul className="flex-1 space-y-3 mb-8">
-                  {tier.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-3 text-sm"
-                    >
-                      <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                      <span className="text-foreground/80">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <a
-                  href={tier.disabled ? undefined : tier.ctaHref}
-                  className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all ${
-                    tier.highlighted
-                      ? "bg-primary text-primary-foreground hover:brightness-110 hover:scale-[1.02] active:scale-100"
-                      : tier.disabled
-                        ? "bg-secondary text-muted-foreground cursor-not-allowed"
-                        : "bg-secondary text-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-100"
-                  }`}
-                  {...(tier.disabled
-                    ? { "aria-disabled": true }
-                    : { target: "_blank", rel: "noopener noreferrer" })}
-                >
-                  {tier.cta}
-                  {!tier.disabled && <ArrowRight className="w-4 h-4" />}
-                </a>
+                ))}
               </div>
+            </div>
+            {/* Dot indicators */}
+            <div className="flex justify-center gap-2 mt-6">
+              {pricingTiers.map((tier, index) => (
+                <button
+                  key={tier.name}
+                  type="button"
+                  aria-label={`Go to ${tier.name} plan`}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === selectedIndex
+                      ? "bg-primary w-6"
+                      : "bg-muted-foreground/30"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+            {pricingTiers.map((tier) => (
+              <PricingCard key={tier.name} tier={tier} annual={annual} />
             ))}
           </div>
         </div>
