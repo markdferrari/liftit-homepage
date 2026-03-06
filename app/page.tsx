@@ -97,6 +97,7 @@ const pricingTiers: PricingTier[] = [
       "Workout history & stats",
       "Basic analytics",
       "Weekly volume targets",
+      "Form guides for 1000+ exercises",
       "Community workout plans",
       "Plate calculator & rest timer",
       "1 rep max calculator",
