@@ -118,7 +118,7 @@ const pricingTiers: PricingTier[] = [
       "Everything in Free",
       "Private workout plan sharing",
       "Advanced analytics",
-      "Early access to new features",
+      "Personalised workout recommendations",
       "4-week free trial included",
       "Recovery meal suggestions",
       "Garmin/Fitbit integration"
@@ -137,12 +137,11 @@ const pricingTiers: PricingTier[] = [
     description: "Tailored for your lifestyle, goals, and recovery",
     features: [
       "Everything in Premium",
-      "Personalised workout recommendations",
+      "Long-term personalised workout plans",
       "Recovery meal suggestions",
       "Weekly target optimisation",
       "Auto session generation",
-      "Unlimited private plan sharing",
-      "Goal-setting with personalised plans",
+      "Unlimited private plan sharing"
     ],
     cta: "Start Free Trial - Full Elite Access for 28 days",
     ctaHref: APP_URL,
