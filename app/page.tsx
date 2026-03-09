@@ -25,7 +25,7 @@ const features = [
     icon: Gauge,
     title: "Beat your Best",
     description:
-      "See your previous session as you work out. Beat your personal records every time.",
+      "Benchmark against your previous session as you work out. See your progress in real-time.",
   },
   {
     icon: Target,
@@ -56,6 +56,12 @@ const features = [
     title: "Workout History",
     description:
       "Full session history with volume stats and delta tracking. See exactly how you're progressing over time.",
+  },
+  {
+    icon: Dumbbell,
+    title: "Personalised Workout Recommendations",
+    description:
+      "Get workout recommendations tailored to your goals, progress, and recovery.",
   },
   {
     icon: Share2,
@@ -129,8 +135,8 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: "Elite",
-    price: "£7.99",
-    annualPrice: "£59.99",
+    price: "£8.99",
+    annualPrice: "£79.99",
     annualPeriod: "/year",
     period: "/month",
     badge: "Scientifically Driven Programming",
