@@ -25,7 +25,7 @@ const features = [
     icon: Gauge,
     title: "Beat your Best",
     description:
-      "Benchmark against your previous session as you work out. See your progress in real-time.",
+      "See every rep, set, and weight from your last session — live, as you train. Know exactly what it takes to beat yourself, every single time.",
   },
   {
     icon: Target,
@@ -61,7 +61,7 @@ const features = [
     icon: Dumbbell,
     title: "Personalised Workout Recommendations",
     description:
-      "Get workout recommendations tailored to your goals, progress, and recovery.",
+      "Recommendations grounded in peer-reviewed sports science — tailored to your goals, schedule, and recovery.",
   },
   {
     icon: Share2,
@@ -95,9 +95,9 @@ interface PricingTier {
 const pricingTiers: PricingTier[] = [
   {
     name: "Free",
-    price: "$0",
+    price: "£0",
     period: "forever",
-    description: "Everything you need to start tracking your lifts.",
+    description: "Real-time progress tracking with Beat Your Best — see your last session as you lift, free forever.",
     features: [
       "Unlimited workout logging",
       "Workout history & stats",
@@ -119,12 +119,12 @@ const pricingTiers: PricingTier[] = [
     annualPeriod: "/year",
     period: "/month",
     badge: "Popular",
-    description: "For lifters who want more control and insights.",
+    description: "Science-backed programming to break through plateaus and train with purpose.",
     features: [
       "Everything in Free",
       "Private workout plan sharing",
       "Advanced analytics",
-      "Personalised workout recommendations",
+      "Science-backed workout recommendations",
       "4-week free trial included",
       "Recovery meal suggestions",
       "Garmin/Fitbit integration"
@@ -140,13 +140,13 @@ const pricingTiers: PricingTier[] = [
     annualPeriod: "/year",
     period: "/month",
     badge: "Scientifically Driven Programming",
-    description: "Tailored for your lifestyle, goals, and recovery",
+    description: "A fully custom program built from peer-reviewed sports science — designed around your body, your goals, and your life.",
     features: [
       "Everything in Premium",
-      "Long-term personalised workout plans",
-      "Recovery meal suggestions",
+      "Custom long-term programs backed by peer-reviewed research",
+      "Auto session generation based on your recovery & schedule",
       "Weekly target optimisation",
-      "Auto session generation",
+      "Recovery meal suggestions",
       "Unlimited private plan sharing"
     ],
     cta: "Start Free Trial - Full Elite Access for 28 days",
@@ -303,13 +303,14 @@ export default function Home() {
 
           {/* Tagline */}
           <p className="animate-fade-in-up animate-delay-200 text-xl sm:text-2xl md:text-3xl font-medium text-foreground/90">
-            Track Your Lifts. Beat your best.
+            Track Your Lifts. Beat Your Best.
           </p>
 
           {/* Subtitle */}
           <p className="animate-fade-in-up animate-delay-300 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Beat your best — see your previous session as you lift, beat your
-            personal records, and watch your progress compound over time.
+            See exactly what you lifted last session — in real time, as you
+            train. Every set is a chance to outperform yourself, and LiftIt
+            makes sure you never miss it.
           </p>
 
           {/* CTA */}
@@ -349,12 +350,12 @@ export default function Home() {
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              Everything you need to{" "}
-              <span className="text-primary">level up</span>
+              Built to make you{" "}
+              <span className="text-primary">stronger</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Built for lifters who want to get stronger, not fiddle with
-              spreadsheets.
+              Every feature exists for one reason: to help you lift more, recover
+              smarter, and never plateau.
             </p>
           </div>
 
@@ -396,7 +397,7 @@ export default function Home() {
               Simple, honest <span className="text-primary">pricing</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Start free. Upgrade when you&apos;re ready. No hidden fees.
+              Start with a 28-day all-inclusive trial with zero commitment. Sign up when you&apos;re ready for long-term results.
             </p>
 
             {/* Billing toggle */}
@@ -498,7 +499,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-muted-foreground text-sm max-w-md">
-            Track your lifts. Beat your best - every session.
+            Real progress, every session. Backed by science, built for lifters.
           </p>
           <a
             href={APP_URL}
